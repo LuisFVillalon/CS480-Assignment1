@@ -10,7 +10,7 @@ sem_t FLAG;
 int lineNumber = 1;
 
 /* Each thread performs the following*/
-void *bot() {
+void *bot(void *arg) {
 	// Thread's ID
 	pthread_t tid = pthread_self();
 
@@ -41,14 +41,12 @@ void *bot() {
 				tid);
 		}
 		lineNumber++;
-
-		// Close the file and relase the semaphore FLAG
+		// Close the file and relase the semaphore
 		printf("Thread %d is running\n", tid);
 		fclose(fp);
 		sem_post(&FLAG);
 	}
 
-	// Exit
 	return NULL;
 }
 
@@ -80,13 +78,12 @@ int main() {
 			- tids[i] = thread id (output parameter)
 			- NULL = use default thread settings
 			- bot = function the thread executes
-			- NULL = function requires four parameters
 		*/
-		pthread_create(&tids[i], NULL, bot, NULL);
+		pthread_create(&tids[i], NULL, bot);
 	}
 
 	// POSIX (pthread_join) call for blocking/calling threads to complete their work
-	for (int i = 1; i < 8; i++) {
+	for (int i = 0; i < 7; i++) {
 		pthread_join(tids[i], NULL);
 	}
 
