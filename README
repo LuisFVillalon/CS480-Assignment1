@@ -1,0 +1,38 @@
+Team Members: Luis Villalon and Bobby Bavongkhoun
+
+Class Account Username: cssc3169 
+
+Class Information: CS 480, Summer 2026
+
+Assignment Information: Programming Assignment #1
+
+List of project files:
+ - main.c
+ - main.h
+ - Makefile
+ - README
+
+COMPILATION: 
+    gcc main.c -o bots -lpthread
+
+EXECUTION:
+    ./bots
+
+CLEANUP:
+    make clean
+
+Design Decisions:
+    Numbered ids were assigned and passed to each thread which made it safe to determine which threads where odd and even.
+    Each thread was given a sleep behavior depening on its odd or even status so threads wait periodically. The semaphore 
+    FLAG was used to ensure thread remained exclusive when accessing the share file, which prevents data corruption. pthread_join()
+    is called in a seperate loop after all threads are created to ensure all 7 threads run concurrently. 
+
+Extra feautres:
+    Each line in the QUOTE.txt file is numbered. The code keeps track how many lines have been created in the txt file.
+
+Deficiencies:
+    I had a hard time understanding the instructions, specfically the part in which id (pthread_id() or an int) was suppose to show with the thread.
+
+Lessons Learned:
+    We learned how to use semaphores to prevent conditions where multiple threads access a shared resource. We also learned how synchorinization processes
+    are essential for maintaining data intact in multi-thread programs. 
