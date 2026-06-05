@@ -4,7 +4,7 @@
 all: bots
 
 bots: main.c main.h
-    gcc main.c -o bots -lpthread
+	gcc main.c -o bots -lpthread
 
 clean:
 	rm -f bots QUOTE.txt
