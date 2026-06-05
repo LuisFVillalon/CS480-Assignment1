@@ -10,7 +10,7 @@ sem_t FLAG;
 int lineNumber = 1;
 
 /* Each thread performs the following*/
-void *bot(void *arg) {
+void *bot() {
 	// Thread's ID
 	pthread_t tid = pthread_self();
 
