@@ -80,8 +80,9 @@ int main() {
 			- tids[i] = thread id (output parameter)
 			- NULL = use default thread settings
 			- bot = function the thread executes
+			- NULL = function requires four parameters
 		*/
-		pthread_create(&tids[i], NULL, bot);
+		pthread_create(&tids[i], NULL, bot, NULL);
 	}
 
 	// POSIX (pthread_join) call for blocking/calling threads to complete their work
