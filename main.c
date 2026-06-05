@@ -13,6 +13,7 @@ int lineNumber = 1;
 void *bot(void *arg) {
 	// Thread's ID
 	pthread_t tid = pthread_self();
+	int id = *(int *)arg;
 
 	for (int i = 1; i < 8; i++) {
 	/* 
@@ -20,7 +21,7 @@ void *bot(void *arg) {
 		Even thread number, every two seconds.
 		Odd thread number, every three seconds. 
 	*/
-		if (tid % 2 == 0) {
+		if (id % 2 == 0) {
 			sleep(2);
 		} else {
 			sleep(3);
@@ -28,21 +29,21 @@ void *bot(void *arg) {
 		sem_wait(&FLAG);
 		// Open the file QUOTE.txt and write the thread's id followed by a quote depending on even or odd
 		FILE *fp = fopen("QUOTE.txt", "a");
-		if (tid % 2 == 0) {
+		if (id % 2 == 0) {
 			fprintf(fp,
 				"%d Thread ID %d: \"Controlling complexity is the essence of computer programming.\" --Brian Kernighan\r\n",
 				lineNumber,
-				tid);
+				id);
 		} else {
 			fprintf(fp,
 				"%d Thread ID %d: \"Computer science is no more about computers than astronomy is about telescopes.\" --Edsger Dijkstra\r\n",
 				lineNumber,
-				tid);
+				id);
 		}
 		lineNumber++;
 
 		// Close the file and release the semaphore
-		printf("Thread %d is running\n", tid);
+		printf("Thread %d is running\n", id);
 		fclose(fp);
 		sem_post(&FLAG);
 	}
@@ -72,8 +73,8 @@ int main() {
 	pthread_t tids[7];
 	int ids[7];
 	for (int i = 1; i < 8; i++) {
-		id[i] = i
-		printf("Creating thread, in main(): %d\n", id);
+		ids[i] = i;
+		printf("Creating thread, in main(): %d\n", ids[i]);
 		/*
 			Create thread using POSIX version (pthread_create):
 			- tids[i] = thread id (output parameter)
@@ -81,7 +82,7 @@ int main() {
 			- bot = function the thread executes
 
 		*/
-		pthread_create(&tids[i], NULL, bot, &id[i]);
+		pthread_create(&tids[i], NULL, bot, &ids[i]);
 	}
 
 	// POSIX (pthread_join) call for blocking/calling threads to complete their work
