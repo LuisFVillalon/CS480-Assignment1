@@ -73,7 +73,7 @@ int main() {
 	pthread_t tids[7];
 	int ids[7];
 	for (int i = 0; i < 7; i++) {
-		ids[i] = i;
+		ids[i] = i + 1;
 		printf("Creating thread, in main(): %d\n", ids[i]);
 		/*
 			Create thread using POSIX version (pthread_create):
