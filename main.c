@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <semaphore.h>
 #include <pthread.h>
-#include "bots.h"
+#include "main.h"
 
 // Our semaphore
 sem_t FLAG;
