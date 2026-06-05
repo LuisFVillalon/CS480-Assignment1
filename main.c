@@ -15,7 +15,8 @@ void *bot(void *arg) {
 	pthread_t tid = pthread_self();
 	int id = *(int *)arg;
 
-	for (int i = 1; i < 8; i++) {
+	// Run a total of 8 times 
+	for (int i = 0; i < 8; i++) {
 	/* 
 		Periodically get the semaphore FLAG.
 		Even thread number, every two seconds.
