@@ -6,6 +6,6 @@
 extern sem_t FLAG;
 extern int lineNumber;
 
-void *bot(void *arg);
+void *bot();
 
 #endif
