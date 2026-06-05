@@ -72,7 +72,7 @@ int main() {
 	// Hold IDs for threads
 	pthread_t tids[7];
 	int ids[7];
-	for (int i = 1; i < 8; i++) {
+	for (int i = 0; i < 7; i++) {
 		ids[i] = i;
 		printf("Creating thread, in main(): %d\n", ids[i]);
 		/*
