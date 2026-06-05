@@ -1,3 +1,20 @@
+/*
+CS 480 - Operating Systems [2026 Summer Session]
+Project: Assigment 1 - Chatbots with Threads & Semaphores
+File: main.c
+
+Team Members:
+- Luis Villalon: cssc3169 
+- Bobby Bavongkhoun: cssc3110
+
+Description:
+This program uses POSIX threads and a semahore to simulat seven chatbots writing mesages to a shared file.
+Since multuple threads would run concurrently, a semaphore is used to ensure that only one thread can accesss QUOTE.txt at a time.
+Each thread periodically writes it s ID and a quote based on whether the thread number is one or odd.
+The program would then record the process ID, wait for all threads to finish, release the allocated resources, and then exit.
+*/
+
+
 #include <stdio.h>
 #include <unistd.h>
 #include <semaphore.h>
