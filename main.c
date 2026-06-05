@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <semaphore.h>
 #include <pthread.h>
-#include "bots.h"
+#include "main.h"
 
 // Our semaphore
 sem_t FLAG;
@@ -79,7 +79,7 @@ int main() {
 			- tids[i] = thread id (output parameter)
 			- NULL = use default thread settings
 			- bot = function the thread executes
-			
+
 		*/
 		pthread_create(&tids[i], NULL, bot, &id[i]);
 	}
