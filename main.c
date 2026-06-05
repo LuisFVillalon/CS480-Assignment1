@@ -2,7 +2,7 @@
 #include <unistd.h>
 #include <semaphore.h>
 #include <pthread.h>
-#include "main.h"
+#include "bots.h"
 
 // Our semaphore
 sem_t FLAG;
@@ -26,8 +26,7 @@ void *bot(void *arg) {
 			sleep(3);
 		}
 		sem_wait(&FLAG);
-
-		// Open the file QUOTE.txt and write the thread's id followed by a quote depending on even or odd status
+		// Open the file QUOTE.txt and write the thread's id followed by a quote depending on even or odd
 		FILE *fp = fopen("QUOTE.txt", "a");
 		if (tid % 2 == 0) {
 			fprintf(fp,
@@ -41,7 +40,8 @@ void *bot(void *arg) {
 				tid);
 		}
 		lineNumber++;
-		// Close the file and relase the semaphore
+
+		// Close the file and release the semaphore
 		printf("Thread %d is running\n", tid);
 		fclose(fp);
 		sem_post(&FLAG);
@@ -70,16 +70,18 @@ int main() {
 
 	// Hold IDs for threads
 	pthread_t tids[7];
-	
+	int ids[7];
 	for (int i = 1; i < 8; i++) {
-		printf("Creating thread, in main(): %d\n", i);
+		id[i] = i
+		printf("Creating thread, in main(): %d\n", id);
 		/*
 			Create thread using POSIX version (pthread_create):
 			- tids[i] = thread id (output parameter)
 			- NULL = use default thread settings
 			- bot = function the thread executes
+			
 		*/
-		pthread_create(&tids[i], NULL, bot);
+		pthread_create(&tids[i], NULL, bot, &id[i]);
 	}
 
 	// POSIX (pthread_join) call for blocking/calling threads to complete their work
