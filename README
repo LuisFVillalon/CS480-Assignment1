@@ -33,7 +33,9 @@ Extra features:
   Each line in the QUOTE.txt file is numbered. The code keeps track of how many lines have been created in the text file.
 
 Deficiencies:
-(!)  I had a hard time understanding the instructions, specifically the part where id (pthread_id() or an int) was supposed to be associated with the thread.
+  (Team): During our early development, we initially found it challenging to interpret the thread ID requirement and determine whether the assignment
+  expected the pthread identifier or a custom thread number. After reviewing the specifications, we implemented numbered thread IDs (pthread_id() to distinguish between
+  the even and odd threads for the quote selection.
 
 Lessons Learned:
   We learned how to use semaphores to prevent conditions where multiple threads access a shared resource. We also learned how synchronization processes.
