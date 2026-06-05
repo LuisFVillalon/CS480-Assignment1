@@ -13,7 +13,7 @@ int lineNumber = 1;
 void *bot(void *arg) {
 	// Thread's ID
 	pthread_t tid = pthread_self();
-	int id = *(int *)arg;
+	int num = *(int *)arg;
 
 	// Run a total of 8 times 
 	for (int i = 0; i < 8; i++) {
@@ -22,7 +22,7 @@ void *bot(void *arg) {
 		Even thread number, every two seconds.
 		Odd thread number, every three seconds. 
 	*/
-		if (id % 2 == 0) {
+		if (num % 2 == 0) {
 			sleep(2);
 		} else {
 			sleep(3);
@@ -30,21 +30,21 @@ void *bot(void *arg) {
 		sem_wait(&FLAG);
 		// Open the file QUOTE.txt and write the thread's id followed by a quote depending on even or odd
 		FILE *fp = fopen("QUOTE.txt", "a");
-		if (id % 2 == 0) {
+		if (num % 2 == 0) {
 			fprintf(fp,
-				"%d Thread ID %d: \"Controlling complexity is the essence of computer programming.\" --Brian Kernighan\r\n",
+				"%d Thread ID %lu: \"Controlling complexity is the essence of computer programming.\" --Brian Kernighan\r\n",
 				lineNumber,
-				id);
+				tid);
 		} else {
 			fprintf(fp,
-				"%d Thread ID %d: \"Computer science is no more about computers than astronomy is about telescopes.\" --Edsger Dijkstra\r\n",
+				"%d Thread ID %lu: \"Computer science is no more about computers than astronomy is about telescopes.\" --Edsger Dijkstra\r\n",
 				lineNumber,
-				id);
+				tid);
 		}
 		lineNumber++;
 
 		// Close the file and release the semaphore
-		printf("Thread %d is running\n", id);
+		printf("Thread %lu is running\n", tid);
 		fclose(fp);
 		sem_post(&FLAG);
 	}
